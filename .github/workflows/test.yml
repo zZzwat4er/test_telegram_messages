@@ -18,11 +18,11 @@ jobs:
         shell: bash
     steps:
       - name: Create artifact
-        run: echo ${ARTIFACT} > ${ARTIFACT}
+        run: echo ${{ env.ARTIFACT }} > ${{ env.ARTIFACT }}
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ ARTIFACT }}
-          path: ${{ ARTIFACT }}
+          name: ${{ env.ARTIFACT }}
+          path: ${{ env.ARTIFACT }}
 
   Windows-test:
     runs-on: windows-latest
@@ -36,9 +36,9 @@ jobs:
         shell: cmd
     steps:
       - name: Create artifact
-        run: echo ${ARTIFACT} > ${ARTIFACT}
+        run: echo ${{ env.ARTIFACT }} > ${{ env.ARTIFACT }}
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ ARTIFACT }}
-          path: ${{ ARTIFACT }}
+          name: ${{ env.ARTIFACT }}
+          path: ${{ env.ARTIFACT }}
       

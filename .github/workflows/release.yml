@@ -25,7 +25,7 @@ jobs:
                run_id: context.payload.workflow_run.id,
             });
             let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "${{ LINUX_RELEASE }} || artifact.name == "${{ WINDOWS_RELEASE }}"
+              return artifact.name == "${{ env.LINUX_RELEASE }} || artifact.name == "${{ env.WINDOWS_RELEASE }}"
             })[0];
             let download = await github.rest.actions.downloadArtifact({
                owner: context.repo.owner,
