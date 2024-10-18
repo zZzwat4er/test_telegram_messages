@@ -12,22 +12,17 @@ jobs:
       matrix:
         BuildType: [Release]
     env:
-      ARTIFACT: test.txt
+      ARTIFACT: Linuxtest.txt
     defaults:
       run:
         shell: bash
     steps:
       - name: Create artifact
-        uses: "finnp/create-file-action@master"
-        env:
-          FILE_NAME: ${{ env.ARTIFACT }}
-          FILE_DATA: ${{ env.ARTIFACT }}
-      - name: Upload Build File To Telegram
-        uses: appleboy/telegram-action@master
+        run: echo ${{ ARTIFACT }} > ${{ ARTIFACT }}
+      - uses: actions/upload-artifact@v4
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          document: ${{ env.ARTIFACT }}
+          name: ${{ ARTIFACT }}
+          path: ${{ ARTIFACT }}
 
   Windows-test:
     runs-on: windows-latest
@@ -35,19 +30,15 @@ jobs:
       matrix:
         BuildType: [Release]
     env:
-      ARTIFACT: test.txt
+      ARTIFACT: Windowstest.txt
     defaults:
       run:
         shell: cmd
     steps:
       - name: Create artifact
-        uses: "finnp/create-file-action@master"
-        env:
-          FILE_NAME: ${{ env.ARTIFACT }}
-          FILE_DATA: ${{ env.ARTIFACT }}
-      - name: Upload Build File To Telegram
-        uses: appleboy/telegram-action@master
+        run: echo ${{ ARTIFACT }} > ${{ ARTIFACT }}
+      - uses: actions/upload-artifact@v4
         with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          document: ${{ env.ARTIFACT }}
+          name: ${{ ARTIFACT }}
+          path: ${{ ARTIFACT }}
+      
