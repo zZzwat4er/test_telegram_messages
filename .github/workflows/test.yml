@@ -1,0 +1,51 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Linux-test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        BuildType: [Release]
+    env:
+      ARTIFACT: test.txt
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Create artifact
+        uses: "finnp/create-file-action@master"
+        env:
+          FILE_NAME: ${{ env.ARTIFACT }}
+          FILE_DATA: ${{ env.ARTIFACT }}
+      - name: Upload Build File
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: ${{ runner.temp }}/shadow_build_dir/${{ env.ARTIFACT }}
+
+  Windows-test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        BuildType: [Release]
+    env:
+      ARTIFACT: test.txt
+    defaults:
+      run:
+        shell: cmd
+    steps:
+      - name: Create artifact
+        uses: "finnp/create-file-action@master"
+        env:
+          FILE_NAME: ${{ env.ARTIFACT }}
+          FILE_DATA: ${{ env.ARTIFACT }}
+      - name: Upload Build File
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: ${{ runner.temp }}/shadow_build_dir/${{ env.ARTIFACT }}
