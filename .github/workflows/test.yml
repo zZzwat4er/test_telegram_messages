@@ -22,11 +22,12 @@ jobs:
         env:
           FILE_NAME: ${{ env.ARTIFACT }}
           FILE_DATA: ${{ env.ARTIFACT }}
-      - name: Upload Build File
-        uses: actions/upload-artifact@master
+      - name: Upload Build File To Telegram
+        uses: appleboy/telegram-action@master
         with:
-          name: ${{ env.ARTIFACT }}
-          path: ${{ runner.temp }}/shadow_build_dir/${{ env.ARTIFACT }}
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          document: ${{ env.ARTIFACT }}
 
   Windows-test:
     runs-on: windows-latest
@@ -44,8 +45,9 @@ jobs:
         env:
           FILE_NAME: ${{ env.ARTIFACT }}
           FILE_DATA: ${{ env.ARTIFACT }}
-      - name: Upload Build File
-        uses: actions/upload-artifact@master
+      - name: Upload Build File To Telegram
+        uses: appleboy/telegram-action@master
         with:
-          name: ${{ env.ARTIFACT }}
-          path: ${{ runner.temp }}/shadow_build_dir/${{ env.ARTIFACT }}
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          document: ${{ env.ARTIFACT }}
